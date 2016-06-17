@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('foursquareApiTestApp', ['restangular']);
+angular.module('foursquareApiTestApp', ['restangular', 'ngTable']);
 
 angular.module('services.config', [])
   .constant('configuration', {
@@ -18,3 +18,4 @@ angular.module('services.config', [])
   	RestangularProvider.setBaseUrl(baseUrl);
 
 });
+  

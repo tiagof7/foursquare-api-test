@@ -2,13 +2,15 @@
 <html>
 <head>
   <% include ../partials/header.ejs %>
+
   <script type ="text/javascript" >
     <% include ../../scripts/angular/angular.min.js %>
     <% include ../../scripts/lodash/lodash.core.js %>
     <% include ../../scripts/restangular/restangular.js %>
 
+    <% include ../../scripts/ng-table/ng-table.min.js %>
+
     //Angular
-   // <% include ../../scripts/config.js %>
     <% include ../../scripts/app.js %>
     <% include ../../scripts/controllers/globalCtrl.js %>
   </script>
@@ -25,38 +27,66 @@
       View all places with certain category within a certain distance from the user </h4>
     </div>
 </div>
-<div class="container">
-  <div class="alert alert-info text-center" role="alert" ng-show="alerts.lenght > 0">
-    To deploy your own copy, and learn the fundamentals of the Heroku platform, head over to the Getting Started with Node on Heroku</a> tutorial.
+<div class="container" ng-controller="GlobalCtrl">
+  <div class="alert alert-info text-center" ng-show="alert">
+    {{alert}}
   </div>
   <hr>
-  <div ng-controller="GlobalCtrl" class="panel">
+  <div class="panel">
     <div class="row">
       <h4>Enter the parameters</h4>
       <hr/>
     </div>
 
     <div class="panel-body">
-
       <div class="row" style="padding-bottom: 20px;">
         <div class="col-sm-8">
           <label class="control-label" for="categoryInput">Category</label>
-          <input name="categoryInput" id="categoryInput" type="text" ng-model="filter.categoria" class="form-control" placeholder="Category" maxlength="100" />
+          <input name="categoryInput" id="categoryInput" type="text" ng-model="filter.query" class="form-control" placeholder="Category" maxlength="100" />
         </div>
         <div class="col-sm-4">
-          <label class="control-label" for="distanceInput">Distance (Km)</label>
-          <input name="distanceInput" id="distanceInput" type="number" ng-model="filter.distance" class="form-control" placeholder="Distance from you in kilometers" maxlength="1000" />
+          <label class="control-label" for="distanceInput">Approximate Distance (m)</label>
+          <input name="distanceInput" id="distanceInput" type="number" ng-model="filter.radius" class="form-control" placeholder="Distance from you in meters
+" maxlength="1000" />
         </div>
       </div>
 
       <div class="row panel-footer text-right" style="padding-top: inherit;">
           <button id="reset-button" ng-click="reset()" class="btn btn-labeled btn-default">
-              <span class="btn-label icon fa fa-eraser"></span>Clear form
+              <span class="btn-label icon fa fa-eraser"></span>Clear
           </button>
           <button id="search-button" ng-click="search()" class="btn btn-labeled btn-primary ng-binding">
               <span class="btn-label icon fa fa-search"></span>Search
           </button>
       </div>
+
+      <!-- Results -->
+      <div class="panel" ng-show="result">
+          <div class="panel-heading">
+              <span class="panel-title">Results</span>
+          </div>
+
+          <div class="panel-body">
+              <div class="table-light">
+                <table ng-table="tableParams" class="table">
+                    <tr ng-repeat="venue in result | orderBy:'location.distance'">
+                        <td title="'Name'" class="text-left">
+                            {{venue.name}}
+                        </td>
+                        <td title="'Location'" class="text-left">
+                            {{venue.location.formattedAddress[0]}},
+                            {{venue.location.formattedAddress[1]}},
+                            {{venue.location.formattedAddress[2]}}
+                        </td>
+                        <td title="'Distance'" class="text-right"  >
+                            {{venue.location.distance}}
+                        </td>
+                    </tr>
+                </table>
+              </div>
+          </div>
+      </div>
+      
 
     </div>
 
