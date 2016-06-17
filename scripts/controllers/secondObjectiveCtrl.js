@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('foursquareApiTestApp')
-    .controller('GlobalCtrl', function ($scope, NgTableParams) {
+    .controller('SecondObjectiveCtrl', function ($scope, NgTableParams) {
 
         $scope.alert = undefined;
         $scope.filter = {};
