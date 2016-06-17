@@ -25,7 +25,7 @@ angular.module('foursquareApiTestApp')
         }
 
         $scope.search = function(){
-            $('#categoryInput').focus();
+            $('#categoryInput2').focus();
             $scope.alert = '';
 
             $.get(
@@ -46,7 +46,7 @@ angular.module('foursquareApiTestApp')
                     $scope.result = data.response.venues;
                     $scope.tableParams = new NgTableParams({}, { dataset: $scope.result});
                 }
-                $('#search-button').focus();
+                $('#search-button2').focus();
             }
             else{
                 $scope.alert = "An unknown error occurred. Code: " + data.meta.code;

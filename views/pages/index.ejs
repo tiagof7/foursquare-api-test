@@ -132,13 +132,13 @@
             {{alert}}
           </div>
           <div class="row">
-            <h4 class="panel-title" style="padding-left: 15px;">Enter the parameters2</h4>
+            <h4 class="panel-title" style="padding-left: 15px;">Enter the parameters</h4>
             <hr/>
           </div>
           <div class="row" style="padding-bottom: 20px;">
             <div class="col-sm-8">
               <label class="control-label" for="categoryInput">Category</label>
-              <input name="categoryInput" id="categoryInput" type="text" ng-model="filter.query" class="form-control" placeholder="Category" maxlength="100" />
+              <input name="categoryInput" id="categoryInput2" type="text" ng-model="filter.query" class="form-control" placeholder="Category" maxlength="100" />
             </div>
             <div class="col-sm-4">
               <label class="control-label" for="distanceInput">Approximate Distance (m)</label>
@@ -152,7 +152,7 @@
                   <span class="btn-label icon glyphicon glyphicon-trash"></span>
                   <span>Clear</span>
               </button>
-              <button id="search-button" ng-click="search()" class="btn btn-labeled btn-primary ng-binding">
+              <button id="search-button2" ng-click="search()" class="btn btn-labeled btn-primary ng-binding">
                   <span class="btn-label icon glyphicon glyphicon-search"></span>
                   <span>Search</span>
               </button>
@@ -168,7 +168,7 @@
               <div class="panel-body">
                   <div class="table-light">
                     <table ng-table="tableParams" class="table">
-                        <tr ng-repeat="venue in result | orderBy:'stats.checkinsCount' | limitTo:5 ">
+                        <tr ng-repeat="venue in result | orderBy:'-stats.checkinsCount' | limitTo:5 ">
                             <td title="'Name'" class="text-left">
                                 {{venue.name}}
                             </td>
@@ -179,6 +179,9 @@
                             </td>
                             <td title="'Distance'" class="text-right"  >
                                 {{venue.location.distance}}
+                            </td>
+                            <td title="'Nº of Checkins'" class="text-right"  >
+                                {{venue.stats.checkinsCount}}
                             </td>
                         </tr>
                     </table>
