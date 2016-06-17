@@ -39,10 +39,12 @@ angular.module('foursquareApiTestApp')
 
         var openResult = function(data){
             if (data.meta.code == 200) {
-                $scope.result = data.response.venues;
-                $scope.tableParams = new NgTableParams({}, { dataset: $scope.result});
                 if (data.response.venues.length < 1) {
                     $scope.alert = "No records found!";
+                }
+                else{
+                    $scope.result = data.response.venues;
+                    $scope.tableParams = new NgTableParams({}, { dataset: $scope.result});
                 }
                 $('#search-button').focus();
             }
@@ -51,7 +53,12 @@ angular.module('foursquareApiTestApp')
             }
         }
 
-        var filterResultByDistance
+        // var filterTopFiveByDistance = function(venues){
+        //     var result = [];
+        //     for each (var item in venues) {
+        //       sum += item;
+        //     }
+        // }
 
         var getLocation = function () {
             if (navigator.geolocation) {

@@ -39,10 +39,13 @@ angular.module('foursquareApiTestApp')
 
         var openResult = function(data){
             if (data.meta.code == 200) {
-                $scope.result = data.response.venues;
-                $scope.tableParams = new NgTableParams({}, { dataset: $scope.result});
                 if (data.response.venues.length < 1) {
                     $scope.alert = "No records found!";
+                }
+                else{
+                    $scope.result = data.response.venues;
+                    $scope.tableParams = new NgTableParams({}, { dataset: $scope.result});
+                    initMap($scope.result);
                 }
                 $('#search-button').focus();
             }
@@ -50,8 +53,6 @@ angular.module('foursquareApiTestApp')
                 $scope.alert = "An unknown error occurred. Code: " + data.meta.code;
             }
         }
-
-        var filterResultByDistance
 
         var getLocation = function () {
             if (navigator.geolocation) {
@@ -62,6 +63,8 @@ angular.module('foursquareApiTestApp')
         }
 
         var showPosition = function (position) {
+            $scope.myLatLng = {lat: position.coords.latitude, lng: position.coords.longitude};
+            initMap();
             $scope.filter.ll = position.coords.latitude+','+ position.coords.longitude;
 
             $scope.alert = undefined;
@@ -86,5 +89,34 @@ angular.module('foursquareApiTestApp')
         
         resetFilter();
         getLocation();
+
+        $scope.map;
+        var initMap = function ( venues) {
+            
+            $scope.map = new google.maps.Map(document.getElementById('map'), {
+              center: {lat: $scope.myLatLng.lat, lng: $scope.myLatLng.lng},
+              zoom: 15
+            });
+
+            var marker = new google.maps.Marker({
+                position: $scope.myLatLng,
+                map: $scope.map,
+                title: 'I\'m here!'
+            });
+
+            angular.forEach(venues, function(venue) {
+              var marker = new google.maps.Marker({
+                    position: {
+                        lat: venue.location.lat,
+                        lng: venue.location.lng
+                    },
+                    map: $scope.map,
+                    title: venue.name
+              });
+            });
+
+        }
+
+      
 
     });

@@ -3,28 +3,35 @@
 <head>
   <% include ../partials/header.ejs %>
 
+ 
+
   <script type ="text/javascript" >
     <% include ../../scripts/angular/angular.min.js %>
     <% include ../../scripts/lodash/lodash.core.js %>
     <% include ../../scripts/restangular/restangular.js %>
 
     <% include ../../scripts/ng-table/ng-table.min.js %>
+    <% include ../../scripts/google-maps/maps.js %>
 
-    //Angular
     <% include ../../scripts/app.js %>
     <% include ../../scripts/controllers/firstObjectiveCtrl.js %>
     <% include ../../scripts/controllers/secondObjectiveCtrl.js %>
+
+     
   </script>
+
 </head>
 
 <body ng-app="foursquareApiTestApp">
 
   <% include ../partials/nav.ejs %>
 
+<div id="map" style="height: 50%;"></div>
+
 <div class="container" >
   <div class="panel-group">
 
-    <div class="panel panel-default" ng-controller="FirstObjectiveCtrl">
+    <div class="panel panel-default" ng-controller="FirstObjectiveCtrl" style="padding-top: 15px;">
 
       <div class="panel-heading">
         <h4 class="panel-title">
@@ -69,12 +76,14 @@
               </button>
           </div>
 
+          
           <!-- Results -->
           <div class="panel" ng-show="result">
               <div class="row">
                 <h4 class="panel-title" style="padding-left: 15px;">Results</h4>
                 <hr/>
               </div>
+
 
               <div class="panel-body">
                   <div class="table-light">
@@ -159,7 +168,7 @@
               <div class="panel-body">
                   <div class="table-light">
                     <table ng-table="tableParams" class="table">
-                        <tr ng-repeat="venue in result | orderBy:'location.distance'">
+                        <tr ng-repeat="venue in result | orderBy:'stats.checkinsCount' | limitTo:5 ">
                             <td title="'Name'" class="text-left">
                                 {{venue.name}}
                             </td>
