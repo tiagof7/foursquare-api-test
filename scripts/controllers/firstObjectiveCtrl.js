@@ -91,7 +91,9 @@ angular.module('foursquareApiTestApp')
         getLocation();
 
         $scope.map;
+        var image = 'streetview-icon.png';
         var initMap = function ( venues) {
+            $('#categoryInput').focus();
             
             $scope.map = new google.maps.Map(document.getElementById('map'), {
               center: {lat: $scope.myLatLng.lat, lng: $scope.myLatLng.lng},
@@ -101,7 +103,8 @@ angular.module('foursquareApiTestApp')
             var marker = new google.maps.Marker({
                 position: $scope.myLatLng,
                 map: $scope.map,
-                title: 'I\'m here!'
+                title: 'I\'m here!',
+                icon: image
             });
 
             angular.forEach(venues, function(venue) {
@@ -114,6 +117,8 @@ angular.module('foursquareApiTestApp')
                     title: venue.name
               });
             });
+
+            $('#search-button').focus();
 
         }
 
