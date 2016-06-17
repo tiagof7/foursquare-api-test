@@ -1,6 +1,6 @@
 {
   "name": "foursquare-api-test",
-  "version": "0.2.5",
+  "version": "1.0.0",
   "description": "Teste usando a api do Foursquare",
   "engines": {
     "node": "5.9.1"
