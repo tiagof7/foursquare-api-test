@@ -2,9 +2,19 @@
 <html>
 <head>
   <% include ../partials/header.ejs %>
+  <script type ="text/javascript" >
+    <% include ../../scripts/angular/angular.min.js %>
+    <% include ../../scripts/lodash/lodash.core.js %>
+    <% include ../../scripts/restangular/restangular.js %>
+
+    //Angular
+    <% include ../../scripts/app.js %>
+    <% include ../../scripts/config.js %>
+    <% include ../../scripts/controllers/globalCtrl.js %>
+  </script>
 </head>
 
-<body>
+<body ng-app="foursquareApiTestApp">
 
   <% include ../partials/nav.ejs %>
 
@@ -21,8 +31,13 @@
     To deploy your own copy, and learn the fundamentals of the Heroku platform, head over to the <a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs" class="alert-link">Getting Started with Node on Heroku</a> tutorial.
   </div>
   <hr>
-  <div class="row">
-
+  <div class="row" ng-controller="GlobalCtrl">
+    <div>
+      <label>Name:</label>
+      <input type="text" ng-model="yourName" placeholder="Enter a name here">
+      <hr>
+      <h1>Hello {{yourName}}!</h1>
+    </div>
   </div>
 
 
