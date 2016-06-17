@@ -20,81 +20,171 @@
 
   <% include ../partials/nav.ejs %>
 
-<div class="container text-left" style="max-height: 80px; padding-top: 0px;">
-    <div class="row">
-      <h4 >
-      <strong>Objective:</strong> 
-      View all places with certain category within a certain distance from the user </h4>
-    </div>
-</div>
-<div class="container" ng-controller="GlobalCtrl">
-  <div class="alert alert-info text-center" ng-show="alert">
-    {{alert}}
-  </div>
-  <hr>
-  <div class="panel">
-    <div class="row">
-      <h4>Enter the parameters</h4>
-      <hr/>
-    </div>
+<div class="container" >
+  <div class="panel-group">
 
-    <div class="panel-body">
-      <div class="row" style="padding-bottom: 20px;">
-        <div class="col-sm-8">
-          <label class="control-label" for="categoryInput">Category</label>
-          <input name="categoryInput" id="categoryInput" type="text" ng-model="filter.query" class="form-control" placeholder="Category" maxlength="100" />
-        </div>
-        <div class="col-sm-4">
-          <label class="control-label" for="distanceInput">Approximate Distance (m)</label>
-          <input name="distanceInput" id="distanceInput" type="number" ng-model="filter.radius" class="form-control" placeholder="Distance from you in meters
-" maxlength="1000" />
-        </div>
+    <div class="panel panel-default" ng-controller="GlobalCtrl">
+
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" href="#collapse1">
+            <strong>Objective:</strong> 
+            View all places with certain category within a certain distance from the user
+          </a>
+        </h4>
       </div>
 
-      <div class="row panel-footer text-right" style="padding-top: inherit;">
-          <button id="reset-button" ng-click="reset()" class="btn btn-labeled btn-default">
-              <span class="btn-label icon glyphicon glyphicon-trash"></span>
-              <span>Clear</span>
-          </button>
-          <button id="search-button" ng-click="search()" class="btn btn-labeled btn-primary ng-binding">
-              <span class="btn-label icon glyphicon glyphicon-search"></span>
-              <span>Search</span>
-          </button>
-      </div>
+      <div id="collapse1" class="panel-collapse collapse">
 
-      <!-- Results -->
-      <div class="panel" ng-show="result">
+
+        <div class="panel-body">
+          <div class="alert alert-info text-center" ng-show="alert">
+            {{alert}}
+          </div>
           <div class="row">
-            <h4>Results</h4>
+            <h4 class="panel-title" style="padding-left: 15px;">Enter the parameters</h4>
             <hr/>
           </div>
+          <div class="row" style="padding-bottom: 20px;">
+            <div class="col-sm-8">
+              <label class="control-label" for="categoryInput">Category</label>
+              <input name="categoryInput" id="categoryInput" type="text" ng-model="filter.query" class="form-control" placeholder="Category" maxlength="100" />
+            </div>
+            <div class="col-sm-4">
+              <label class="control-label" for="distanceInput">Approximate Distance (m)</label>
+              <input name="distanceInput" id="distanceInput" type="number" ng-model="filter.radius" class="form-control" placeholder="Distance from you in meters
+    " maxlength="1000" />
+            </div>
+          </div>
 
-          <div class="panel-body">
-              <div class="table-light">
-                <table ng-table="tableParams" class="table">
-                    <tr ng-repeat="venue in result | orderBy:'location.distance'">
-                        <td title="'Name'" class="text-left">
-                            {{venue.name}}
-                        </td>
-                        <td title="'Location'" class="text-left">
-                            {{venue.location.formattedAddress[0]}},
-                            {{venue.location.formattedAddress[1]}},
-                            {{venue.location.formattedAddress[2]}}
-                        </td>
-                        <td title="'Distance'" class="text-right"  >
-                            {{venue.location.distance}}
-                        </td>
-                    </tr>
-                </table>
+          <div class="row panel-footer text-right" style="padding-top: inherit;">
+              <button id="reset-button" ng-click="reset()" class="btn btn-labeled btn-default">
+                  <span class="btn-label icon glyphicon glyphicon-trash"></span>
+                  <span>Clear</span>
+              </button>
+              <button id="search-button" ng-click="search()" class="btn btn-labeled btn-primary ng-binding">
+                  <span class="btn-label icon glyphicon glyphicon-search"></span>
+                  <span>Search</span>
+              </button>
+          </div>
+
+          <!-- Results -->
+          <div class="panel" ng-show="result">
+              <div class="row">
+                <h4 class="panel-title" style="padding-left: 15px;">Results</h4>
+                <hr/>
+              </div>
+
+              <div class="panel-body">
+                  <div class="table-light">
+                    <table ng-table="tableParams" class="table">
+                        <tr ng-repeat="venue in result | orderBy:'location.distance'">
+                            <td title="'Name'" class="text-left">
+                                {{venue.name}}
+                            </td>
+                            <td title="'Location'" class="text-left">
+                                {{venue.location.formattedAddress[0]}},
+                                {{venue.location.formattedAddress[1]}},
+                                {{venue.location.formattedAddress[2]}}
+                            </td>
+                            <td title="'Distance'" class="text-right"  >
+                                {{venue.location.distance}}
+                            </td>
+                        </tr>
+                    </table>
+                  </div>
               </div>
           </div>
+        </div>
+        
+
       </div>
-      
 
     </div>
+    <!-- End collapse1 -->
+
+    <div class="panel panel-default" ng-controller="GlobalCtrl">
+
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" href="#collapse2">
+            <strong>Objective:</strong> 
+            View the top five of places according to the amount of checkins near the user's current location
+          </a>
+        </h4>
+      </div>
+
+      <div id="collapse2" class="panel-collapse collapse">
+
+
+        <div class="panel-body">
+          <div class="alert alert-info text-center" ng-show="alert">
+            {{alert}}
+          </div>
+          <div class="row">
+            <h4 class="panel-title" style="padding-left: 15px;">Enter the parameters2</h4>
+            <hr/>
+          </div>
+          <div class="row" style="padding-bottom: 20px;">
+            <div class="col-sm-8">
+              <label class="control-label" for="categoryInput">Category</label>
+              <input name="categoryInput" id="categoryInput" type="text" ng-model="filter.query" class="form-control" placeholder="Category" maxlength="100" />
+            </div>
+            <div class="col-sm-4">
+              <label class="control-label" for="distanceInput">Approximate Distance (m)</label>
+              <input name="distanceInput" id="distanceInput" type="number" ng-model="filter.radius" class="form-control" placeholder="Distance from you in meters
+    " maxlength="1000" />
+            </div>
+          </div>
+
+          <div class="row panel-footer text-right" style="padding-top: inherit;">
+              <button id="reset-button" ng-click="reset()" class="btn btn-labeled btn-default">
+                  <span class="btn-label icon glyphicon glyphicon-trash"></span>
+                  <span>Clear</span>
+              </button>
+              <button id="search-button" ng-click="search()" class="btn btn-labeled btn-primary ng-binding">
+                  <span class="btn-label icon glyphicon glyphicon-search"></span>
+                  <span>Search</span>
+              </button>
+          </div>
+
+          <!-- Results -->
+          <div class="panel" ng-show="result">
+              <div class="row">
+                <h4 class="panel-title" style="padding-left: 15px;">Results</h4>
+                <hr/>
+              </div>
+
+              <div class="panel-body">
+                  <div class="table-light">
+                    <table ng-table="tableParams" class="table">
+                        <tr ng-repeat="venue in result | orderBy:'location.distance'">
+                            <td title="'Name'" class="text-left">
+                                {{venue.name}}
+                            </td>
+                            <td title="'Location'" class="text-left">
+                                {{venue.location.formattedAddress[0]}},
+                                {{venue.location.formattedAddress[1]}},
+                                {{venue.location.formattedAddress[2]}}
+                            </td>
+                            <td title="'Distance'" class="text-right"  >
+                                {{venue.location.distance}}
+                            </td>
+                        </tr>
+                    </table>
+                  </div>
+              </div>
+          </div>
+        </div>
+        
+
+      </div>
+
+    </div>
+    <!-- end collapse2 -->
 
   </div>
-
+  <!-- End painel group -->
 
 </body>
 </html>
