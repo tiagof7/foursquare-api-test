@@ -53,13 +53,6 @@ angular.module('foursquareApiTestApp')
             }
         }
 
-        // var filterTopFiveByDistance = function(venues){
-        //     var result = [];
-        //     for each (var item in venues) {
-        //       sum += item;
-        //     }
-        // }
-
         var getLocation = function () {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showPosition, showError);

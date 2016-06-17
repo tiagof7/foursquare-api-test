@@ -16,6 +16,7 @@
     <% include ../../scripts/app.js %>
     <% include ../../scripts/controllers/firstObjectiveCtrl.js %>
     <% include ../../scripts/controllers/secondObjectiveCtrl.js %>
+    <% include ../../scripts/controllers/thirdObjectiveCtrl.js %>
 
      
   </script>
@@ -195,6 +196,57 @@
 
     </div>
     <!-- end collapse2 -->
+
+    <div class="panel panel-default" ng-controller="ThirdObjectiveCtrl">
+
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" href="#collapse3">
+            <strong>Objective:</strong> 
+            View a heat map layer of places in a city specified by the user (a zone with many places will be red, a zone with few places will be green)
+          </a>
+        </h4>
+      </div>
+
+      <div id="collapse3" class="panel-collapse collapse">
+
+        <div class="panel-body">
+          <div class="alert alert-info text-center" ng-show="alert">
+            {{alert}}
+          </div>
+          <div class="row">
+            <h4 class="panel-title" style="padding-left: 15px;">Enter the parameters</h4>
+            <hr/>
+          </div>
+          <div class="row" style="padding-bottom: 20px;">
+            <div class="col-sm-6">
+              <label class="control-label" for="categoryInput">Address</label>
+              <input name="categoryInput" id="categoryInput2" type="text" ng-model="filter.address" class="form-control" placeholder="Address" maxlength="100" />
+            </div>
+            <div class="col-sm-6">
+              <label class="control-label" for="categoryInput">Category</label>
+              <input name="categoryInput" id="categoryInput2" type="text" ng-model="filter.query" class="form-control" placeholder="Category" maxlength="100" />
+            </div>
+          </div>
+
+          <div class="row panel-footer text-right" style="padding-top: inherit;">
+              <button id="reset-button" ng-click="reset()" class="btn btn-labeled btn-default">
+                  <span class="btn-label icon glyphicon glyphicon-trash"></span>
+                  <span>Clear</span>
+              </button>
+              <button id="search-button2" ng-click="search()" class="btn btn-labeled btn-primary ng-binding">
+                  <span class="btn-label icon glyphicon glyphicon-search"></span>
+                  <span>Search</span>
+              </button>
+          </div>
+
+        </div>
+        
+
+      </div>
+
+    </div>
+    <!-- end collapse3 -->
 
   </div>
   <!-- End painel group -->
