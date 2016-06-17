@@ -23,7 +23,9 @@ angular.module('foursquareApiTestApp')
                 key: key,
                 client_id: 'O5LYT1UX035RD1FBO3OQS4MQ5P4M1VIF0NEICHSTLJBMEQAK',
                 client_secret: 'QPYQRUHZR4BU2IK0LT0LXDLIPEJI12QQYTE45XBFGPW55PA1',
-                v: '20130815'
+                v: '20130815',
+                signed_in: 'true',
+                libraries: 'visualization'
             };
         }
 
@@ -60,7 +62,6 @@ angular.module('foursquareApiTestApp')
                 }
                 else{
                     $scope.result = data.response.venues;
-                    $scope.tableParams = new NgTableParams({}, { dataset: $scope.result});
                     initMap($scope.result, true);
                 }
                 $('#search-button').focus();
@@ -70,26 +71,11 @@ angular.module('foursquareApiTestApp')
             }
         }
 
-        var showError = function (error) {
-            switch(error.code) {
-                case error.PERMISSION_DENIED:
-                    $scope.alert = "User denied the request for Geolocation."
-                    break;
-                case error.POSITION_UNAVAILABLE:
-                    $scope.alert = "Location information is unavailable."
-                    break;
-                case error.TIMEOUT:
-                    $scope.alert = "The request to get user location timed out."
-                    break;
-                case error.UNKNOWN_ERROR:
-                    $scope.alert = "An unknown error occurred."
-                    break;
-            }
-        }
-        
+       
         resetFilter();
 
         $scope.map;
+        $scope.heatmap;
         var image = 'streetview-icon.png';
         var initMap = function ( venues, satelite) {
             $('#categoryInput').focus();
@@ -100,15 +86,18 @@ angular.module('foursquareApiTestApp')
                   zoom: 13,
                   mapTypeId: google.maps.MapTypeId.SATELLITE
                 });
+                $scope.heatmap = new google.maps.visualization.HeatmapLayer({
+                    data: getPoints(venues),
+                    map: $scope.map
+                });
             }
             else{
                 $scope.map = new google.maps.Map(document.getElementById('map'), {
                   center: {lat: $scope.myLatLng.lat, lng: $scope.myLatLng.lng},
-                  zoom: 13
+                  zoom: 14
                 });
             }
             
-
             var marker = new google.maps.Marker({
                 position: $scope.myLatLng,
                 map: $scope.map,
@@ -116,21 +105,18 @@ angular.module('foursquareApiTestApp')
                 icon: image
             });
 
-            angular.forEach(venues, function(venue) {
-              var marker = new google.maps.Marker({
-                    position: {
-                        lat: venue.location.lat,
-                        lng: venue.location.lng
-                    },
-                    map: $scope.map,
-                    title: venue.name
-              });
-            });
-
             $('#search-button').focus();
 
         }
 
-      
+        function getPoints(venues) {
+            var result = [];
+
+            angular.forEach(venues, function(venue) {
+                result.push(new google.maps.LatLng(venue.location.lat, venue.location.lng));
+            });
+            
+            return result;
+        }
 
     });
