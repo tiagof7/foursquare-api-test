@@ -20,9 +20,7 @@ angular.module('foursquareApiTestApp')
             $scope.filter = {
                 client_id: 'O5LYT1UX035RD1FBO3OQS4MQ5P4M1VIF0NEICHSTLJBMEQAK',
                 client_secret: 'QPYQRUHZR4BU2IK0LT0LXDLIPEJI12QQYTE45XBFGPW55PA1',
-                v: '20130815',
-                query: 'burguer',
-                radius: 2000
+                v: '20130815'
             };
         }
 

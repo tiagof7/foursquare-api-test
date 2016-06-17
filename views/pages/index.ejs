@@ -53,17 +53,20 @@
 
       <div class="row panel-footer text-right" style="padding-top: inherit;">
           <button id="reset-button" ng-click="reset()" class="btn btn-labeled btn-default">
-              <span class="btn-label icon fa fa-eraser"></span>Clear
+              <span class="btn-label icon glyphicon glyphicon-trash"></span>
+              <span>Clear</span>
           </button>
           <button id="search-button" ng-click="search()" class="btn btn-labeled btn-primary ng-binding">
-              <span class="btn-label icon fa fa-search"></span>Search
+              <span class="btn-label icon glyphicon glyphicon-search"></span>
+              <span>Search</span>
           </button>
       </div>
 
       <!-- Results -->
       <div class="panel" ng-show="result">
-          <div class="panel-heading">
-              <span class="panel-title">Results</span>
+          <div class="row">
+            <h4>Results</h4>
+            <hr/>
           </div>
 
           <div class="panel-body">
