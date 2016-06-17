@@ -4,8 +4,11 @@ angular.module('foursquareApiTestApp')
     .controller('GlobalCtrl', function ($scope) {
 
         $scope.alerts = [];
+        $scope.filter = {};
 
-        $scope.yourName = 'tiago';
+        $scope.reset = function(){
+            $scope.filter = {};
+        }
 
         
 

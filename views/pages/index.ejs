@@ -8,8 +8,8 @@
     <% include ../../scripts/restangular/restangular.js %>
 
     //Angular
+   // <% include ../../scripts/config.js %>
     <% include ../../scripts/app.js %>
-    <% include ../../scripts/config.js %>
     <% include ../../scripts/controllers/globalCtrl.js %>
   </script>
 </head>
@@ -18,26 +18,48 @@
 
   <% include ../partials/nav.ejs %>
 
-<div class="jumbotron text-center" style="max-height: 230px; padding-top: 10px;">
-  <div class="container">
-    <a href="/">
-      <img src="/logo-softruck.png" style="width:10%">
-    </a>
-    <p>This is a sample Node application deployed to Heroku. It's a reasonably simple app - but a good foundation for understanding how to get the most out of the Heroku platform.</p>
-  </div>
+<div class="container text-left" style="max-height: 80px; padding-top: 0px;">
+    <div class="row">
+      <h4 >
+      <strong>Objective:</strong> 
+      View all places with certain category within a certain distance from the user </h4>
+    </div>
 </div>
 <div class="container">
-  <div class="alert alert-info text-center" role="alert">
-    To deploy your own copy, and learn the fundamentals of the Heroku platform, head over to the <a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs" class="alert-link">Getting Started with Node on Heroku</a> tutorial.
+  <div class="alert alert-info text-center" role="alert" ng-show="alerts.lenght > 0">
+    To deploy your own copy, and learn the fundamentals of the Heroku platform, head over to the Getting Started with Node on Heroku</a> tutorial.
   </div>
   <hr>
-  <div class="row" ng-controller="GlobalCtrl">
-    <div>
-      <label>Name:</label>
-      <input type="text" ng-model="yourName" placeholder="Enter a name here">
-      <hr>
-      <h1>Hello {{yourName}}!</h1>
+  <div ng-controller="GlobalCtrl" class="panel">
+    <div class="row">
+      <h4>Enter the parameters</h4>
+      <hr/>
     </div>
+
+    <div class="panel-body">
+
+      <div class="row" style="padding-bottom: 20px;">
+        <div class="col-sm-8">
+          <label class="control-label" for="categoryInput">Category</label>
+          <input name="categoryInput" id="categoryInput" type="text" ng-model="filter.categoria" class="form-control" placeholder="Category" maxlength="100" />
+        </div>
+        <div class="col-sm-4">
+          <label class="control-label" for="distanceInput">Distance (Km)</label>
+          <input name="distanceInput" id="distanceInput" type="number" ng-model="filter.distance" class="form-control" placeholder="Distance from you in kilometers" maxlength="1000" />
+        </div>
+      </div>
+
+      <div class="row panel-footer text-right" style="padding-top: inherit;">
+          <button id="reset-button" ng-click="reset()" class="btn btn-labeled btn-default">
+              <span class="btn-label icon fa fa-eraser"></span>Clear form
+          </button>
+          <button id="search-button" ng-click="search()" class="btn btn-labeled btn-primary ng-binding">
+              <span class="btn-label icon fa fa-search"></span>Search
+          </button>
+      </div>
+
+    </div>
+
   </div>
 
 
